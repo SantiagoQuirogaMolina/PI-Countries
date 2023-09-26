@@ -21,7 +21,7 @@ module.exports = (sequelize) => {
       },
     },
     duration: {
-      type: DataTypes.FLOAT, // Duración en horas (puede ser un número decimal)
+      type: DataTypes.FLOAT, 
       allowNull: true,
     },
     season: {

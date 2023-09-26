@@ -17,25 +17,21 @@ const  countryM  = Countries(sequelize);
 const  activityM  = Activiry(sequelize);
 
 
-
-// Aca vendrian las relaciones
-// Product.hasMany(Reviews);
-// ...
-
-countryM.hasMany(activityM, {
-  foreignKey: "countryId",
-  as: "activities", // Nombre de la relación
+// Configura las relaciones
+countryM.belongsToMany(activityM, {
+  through: 'CountryActivity', 
+  foreignKey: 'countryId',
+  as: 'activities',
 });
 
-// ...
-
-activityM.belongsTo(countryM, {
-  foreignKey: "countryId",
+activityM.belongsToMany(countryM, {
+  through: 'CountryActivity', 
+  foreignKey: 'activityId',
+  as: 'countries',
 });
-
 
 module.exports = {
   countryM,
   activityM,
-conn: sequelize,    // para importart la conexión { conn } = require('./db.js');
+conn: sequelize,  
 };
