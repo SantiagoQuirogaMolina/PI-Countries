@@ -1,0 +1,33 @@
+.div{
+    width: 40vh;
+    height: 8vh;
+    background-color: grey;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 1rem;
+
+}
+
+.input{
+    width: 60%;
+    height: 50%;
+    border-radius: 0.3rem;
+    border: none;
+    padding: 0 0 0 1rem;
+}
+
+.btn{
+    min-width: 6vw;
+    min-height: 4vh;
+    border-radius: 0.3rem;
+    background-color: rgb(23, 33, 90);
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover{
+    width: 6.5vw;
+    height: 4.5vh;
+    transition: 0.4s;
+}

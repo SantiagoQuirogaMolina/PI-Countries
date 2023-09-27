@@ -1,0 +1,7 @@
+.home{
+    display: flex;
+    flex-direction: column; /* Alinea los elementos verticalmente */
+    justify-content: flex-start; /* Alinea arriba verticalmente */
+    align-items: center; /* Centra horizontalmente */
+    height: 100vh; 
+}
