@@ -1,7 +1,8 @@
 .div {
   display: flex;
   flex-direction: column; /* Cambiamos a dirección de columna */
-  background-color: rgba(0, 128, 128, 0.6);
+  background-color: rgba(250, 250, 250, 0.05); /* Más transparente */
+
   border: 1px solid gray;
   border-radius: 5px;
   padding: 20px;
@@ -10,20 +11,24 @@
   transform: translateZ(0);
   transition: transform 0.25s ease-out;
   width: 200px;
-  height: 250px;
+  height: 200px;
   position: relative;
-
+  transition: transform 0.25s ease-out;
 }
+.div:hover {
+  transform: scale(1.06); /* Escala el elemento al 110% del tamaño original en el hover */
+  /* Puedes ajustar el valor según el nivel de crecimiento deseado */
+}
+.flagImage {
 
-.image {
-  max-width: 150px;
-  max-height: 150px;
+  max-width: 200px; /* Establece el ancho fijo */
+  max-height: 130px; /* Establece el alto fijo */
   display: block;
   margin: 0 auto;
   border-radius: 8px;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.5);
   position: absolute;
-  top: 30%;
+  top: 35%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -38,11 +43,21 @@
   left: 50%;
   transform: translate(-50%, -50%);
   margin: 0;
-  .h3{
+  .h3 {
     margin-top: -1rem;
+    margin-bottom: 0;
+    color: aliceblue;
+    font-family: "Georgia", serif;
+    font-family: "Times New Roman", serif;
     
+
   }
-  .h2{
-    font-size: 1.4rem;
+  .h2 {
+    color: aliceblue;
+    margin-top: -1rem;
+    font-size: 1.2rem;
+    white-space: nowrap;
+    margin-bottom: 0;
+    font-family: "Monotype Corsiva", "Lucida Handwriting", cursive; 
   }
 }

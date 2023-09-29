@@ -84,18 +84,15 @@
   }
 }
 
-
-
 .t-stroke {
   color: transparent;
   -moz-text-stroke-width: 3px;
   -webkit-text-stroke-width: 4.4px;
   -moz-text-stroke-color: #c4b7b7;
-  -webkit-text-stroke-color: #ffffff;
- 
+  -webkit-text-stroke-color: #f1e9e9;
 
+  margin-bottom: 0.5rem;
 }
-
 
 .t-shadow-halftone {
   position: relative;
@@ -104,8 +101,7 @@
 .t-shadow-halftone::after {
   font-size: 15rem;
   letter-spacing: 0px;
-  background: url('bg.jpg') 50% 47%
-    repeat;
+  background: url("bg.jpg") 50% 47% repeat;
   background-size: 150%;
   -webkit-text-fill-color: transparent;
   -moz-text-fill-color: transparent;
@@ -122,6 +118,6 @@
   transition: all 0.5s ease;
 }
 
-.bg-1{
-  margin-top: -5rem;
+.bg-1 {
+  margin-top: -14rem;
 }

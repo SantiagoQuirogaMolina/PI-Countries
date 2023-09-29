@@ -53,7 +53,7 @@ function LandingPage() {
         <p className="t-stroke t-shadow-halftone">{text}</p>{" "}
         {/* Muestra el texto que se está escribiendo */}
         {showHomeButton &&  <NavLink to='/home'>
-                <button>Home</button>
+                <button className="boton-landing">Home</button>
             </NavLink>}
       </div>
       <div className="background-video">
