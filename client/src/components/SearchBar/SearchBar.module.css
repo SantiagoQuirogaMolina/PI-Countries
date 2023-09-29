@@ -1,33 +1,17 @@
 .div{
-    width: 40vh;
-    height: 8vh;
-    background-color: grey;
+    width: 30rem;
+    min-height: 2rem;
+    background-color: rgb(62, 60, 60);
     display: flex;
-    justify-content: space-around;
+   justify-content: center;
     align-items: center;
     margin: 1rem;
 
 }
 
 .input{
-    width: 60%;
-    height: 50%;
-    border-radius: 0.3rem;
-    border: none;
-    padding: 0 0 0 1rem;
-}
-
-.btn{
-    min-width: 6vw;
-    min-height: 4vh;
-    border-radius: 0.3rem;
-    background-color: rgb(23, 33, 90);
-    border: none;
-    cursor: pointer;
-}
-
-.btn:hover{
-    width: 6.5vw;
-    height: 4.5vh;
-    transition: 0.4s;
+    width: 99%;
+    height: 90%;
+    border-radius: 0.1rem;
+    
 }

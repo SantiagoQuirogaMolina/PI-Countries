@@ -1,5 +1,6 @@
 const initialState = {
   allCountries: [],
+  getCountriesById: null
 };
 
 const reducer = (state = initialState, action) => {
@@ -14,6 +15,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         allCountries: action.payload,
       };
+      case "GET_COUNTRIES_BY_ID":
+        return {
+          ...state,
+          getCountriesById: action.payload,
+        };  
 
     default:
       return state;

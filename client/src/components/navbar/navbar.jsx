@@ -4,12 +4,12 @@ import "./navbar.css?inline";
 import { Link, NavLink } from 'react-router-dom';
 
 
-const Nav = ({}) => {
+const Nav = () => {
     
     return(
         <nav className="nav">
             
-            <Link to='/about'>
+            <Link to='/home'>
                 <button>About</button>
             </Link>
 
@@ -17,9 +17,6 @@ const Nav = ({}) => {
                 <button>Home</button>
             </NavLink>
 
-            <NavLink to='/favorites'>
-                <button>Favorites</button>
-            </NavLink>
         </nav>
     )
 };

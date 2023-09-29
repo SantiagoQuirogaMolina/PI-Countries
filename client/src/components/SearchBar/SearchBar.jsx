@@ -1,16 +1,18 @@
+
 import styles from './SearchBar.module.css';
-import { useState } from "react";
+import React from 'react';
 
-function SearchBar({ handleChange, handleSubmit }) {
-
+function SearchBar({ handleChange }) {
   return (
     <div className={styles.div}>
       <input
         className={styles.input}
         type='search'
-        onChange={(e)=>handleChange(e)}
+        onChange={(e) => handleChange(e)}
+        placeholder="Buscar..."
+       
       />
-      <button className={styles.btn} onClick={handleSubmit}>Agregar</button>
+     
     </div>
   );
 }

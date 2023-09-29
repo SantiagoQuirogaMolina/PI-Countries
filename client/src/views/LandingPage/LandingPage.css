@@ -1,0 +1,127 @@
+/* Establece el estilo para el contenedor del video de fondo */
+.background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Coloca el video detrás del contenido */
+  overflow: hidden; /* Evita que el video se desborde del contenedor */
+  opacity: 0.5;
+}
+
+/* Establece el video de fondo para cubrir toda la pantalla */
+.background-video video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/*--------------------------------------------
+/* Agrega estilos para centrar el texto en pantalla */
+.landing-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 150vh; /* Ajusta el tamaño de acuerdo a tus necesidades */
+}
+
+/* Estilos para el párrafo */
+/* Estilos para centrar el texto en pantalla */
+.landing-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Ajusta el tamaño de acuerdo a tus necesidades */
+}
+
+/* Estilos para el párrafo */
+.landing-page p {
+  font-size: 68px; /* Tamaño de fuente grande */
+  text-align: center;
+  white-space: nowrap; /* Evita el salto de línea */
+  overflow: hidden; /* Oculta el contenido que no cabe en el contenedor */
+  animation: type 1s steps(28, end), blink 0.5s infinite alternate; /* Animaciones */
+}
+
+/* Animación para escribir el texto */
+@keyframes type {
+  from {
+    width: 0; /* Comienza con un ancho de 0, sin texto visible */
+  }
+  to {
+    width: 100%; /* Termina con el ancho completo, mostrando todo el texto */
+  }
+}
+
+/* Animación de parpadeo */
+@keyframes blink {
+  to {
+    visibility: hidden; /* Alterna la visibilidad para simular el parpadeo */
+  }
+}
+
+/* Estilos para el botón */
+.home-button {
+  button {
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    background-color: #1a1a1a;
+    cursor: pointer;
+    transition: border-color 0.25s;
+    color: fffff;
+  }
+  button:hover {
+    border-color: #ff64b9;
+  }
+  button:focus,
+  button:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+  }
+}
+
+
+
+.t-stroke {
+  color: transparent;
+  -moz-text-stroke-width: 3px;
+  -webkit-text-stroke-width: 4.4px;
+  -moz-text-stroke-color: #c4b7b7;
+  -webkit-text-stroke-color: #ffffff;
+ 
+
+}
+
+
+.t-shadow-halftone {
+  position: relative;
+}
+
+.t-shadow-halftone::after {
+  font-size: 15rem;
+  letter-spacing: 0px;
+  background: url('bg.jpg') 50% 47%
+    repeat;
+  background-size: 150%;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -moz-text-stroke-width: 0;
+  -webkit-text-stroke-width: 0;
+  position: absolute;
+  text-align: center;
+  left: 8px;
+  right: 0;
+  top: 6px;
+  z-index: -1;
+  transition: all 0.5s ease;
+}
+
+.bg-1{
+  margin-top: -5rem;
+}
