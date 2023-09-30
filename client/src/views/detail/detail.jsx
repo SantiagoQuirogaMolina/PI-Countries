@@ -34,6 +34,7 @@ function Detail() {
         <p><strong>Subregión:</strong> {country.subregion}</p>
         <p><strong>Área:</strong> {country.area} km²</p>
         <p><strong>Población:</strong> {country.population}</p>
+        
         {/* Aquí puedes renderizar más información del país obtenida */}
       </div>
     </div>

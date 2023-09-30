@@ -5,15 +5,22 @@ import Cards from "../../components/cards/cards";
 import Navbar from "../../components/navbar/navbar";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import "./home.css";
+
+import backgroundImage1 from "./continentes/mundi.png"; // Ruta a tu imagen de fondo 1
+import backgroundImage2 from "./continentes/america.png"; // Ruta a tu imagen de fondo 2
+import backgroundImage3 from "./continentes/asia.png"; // Ruta a tu imagen de fondo 3
+
 function Home() {
   const dispatch = useDispatch();
   const allCountries = useSelector((state) => state.allCountries);
 
   const [searchString, setSearchString] = useState("");
-  const [searchError, setSearchError] = useState(null); // Estado para manejar errores
-
+  const [searchError, setSearchError] = useState(null);
   // Agrega un estado para el temporizador
   const [searchTimeout, setSearchTimeout] = useState(null);
+
+  const [backgroundImage, setBackgroundImage] = useState(backgroundImage1); // Estado para la imagen de fondo
+  const [filtroSeleccionado, setFiltroSeleccionado] = useState("Filtro1"); // Cambia 'Filtro1' al filtro inicial
 
   async function handleChange(e) {
     const newSearchString = e.target.value;
@@ -49,24 +56,36 @@ function Home() {
 
     setSearchTimeout(newSearchTimeout);
   }
-
   useEffect(() => {
     dispatch(getCountries());
   }, [dispatch]);
 
+  useEffect(() => {
+    // Lógica para determinar qué imagen de fondo se debe mostrar según los filtros seleccionados
+    if (filtroSeleccionado === "Filtro1") {
+      setBackgroundImage(backgroundImage1);
+    } else if (filtroSeleccionado === "Filtro2") {
+      setBackgroundImage(backgroundImage2);
+    } else if (filtroSeleccionado === "Filtro3") {
+      setBackgroundImage(backgroundImage3);
+    }
+    // Agrega condiciones adicionales según sea necesario para otros filtros
+  }, [filtroSeleccionado]);
+
   return (
-    <div className="home ">
+    <div
+      className="home home-background"
+      style={{ backgroundImage: `url(${backgroundImage})` }}
+    >
       <p className="text-home">WORLD-COUNTRIES</p>
       <SearchBar handleChange={handleChange} />
       <Navbar handleChange={handleChange} />
       {searchError ? (
         <p>{searchError}</p>
+      ) : allCountries.length > 0 ? (
+        <Cards allCountries={allCountries} />
       ) : (
-        allCountries.length > 0 ? (
-          <Cards allCountries={allCountries} />
-        ) : (
-          <p>No se encontraron países.</p>
-        )
+        <p>No se encontraron países.</p>
       )}
     </div>
   );

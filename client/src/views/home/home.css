@@ -10,3 +10,14 @@
     margin-bottom: -1.5rem;
     font-size: 2rem;
 }
+/* backgroundStyles.css */
+
+/* Estilos para el fondo de la página */
+.home-background {
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    min-height: 100vh;
+    
+  }
+  
