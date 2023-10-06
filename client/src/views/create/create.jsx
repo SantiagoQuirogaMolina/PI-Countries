@@ -9,13 +9,14 @@ function TourForm() {
   useEffect(() => {
     dispatch(getCountries());
   }, [dispatch]);
-  const allCountries = useSelector((state) => state.allCountries); // Accede a la lista de países desde el estado global
+  const allCountries = useSelector((state) => state.allCountries);
 
   const [formData, setFormData] = useState({
     name: "",
-    difficulty: 1,
+    difficulty: 0,
     duration: 0,
-    season: [],
+    season: "",
+    selectedCountries: [],
   });
 
   const handleInputChange = (e) => {
@@ -34,11 +35,9 @@ function TourForm() {
         selectedCountries.push(option.value);
       }
     }
-    // Aquí tienes el array de países seleccionados
-
     setFormData({
       ...formData,
-      selectedCountries,
+      selectedCountries: selectedCountries,
     });
   };
 
@@ -56,23 +55,43 @@ function TourForm() {
     });
   };
 
+  const validateForm = () => {
+    if (
+      formData.name.trim() === "" ||
+      formData.difficulty === 0 ||
+      formData.duration === 0 ||
+      formData.season === "" ||
+      formData.selectedCountries.length === 0
+    ) {
+      alert(
+        "Por favor, complete todos los campos antes de enviar el formulario."
+      );
+      return false;
+    }
+    return true;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Crea un nuevo objeto con los valores modificados
+    if (!validateForm()) {
+      return;
+    }
+
     const formDataToSend = {
       ...formData,
-      difficulty: parseInt(formData.difficulty, 10), // Convierte difficulty a número
-      duration: parseFloat(formData.duration), // Convierte duration a número de punto flotante
-      season: formData.season.join(", "), // Convierte season a una cadena
+      difficulty: parseInt(formData.difficulty, 10),
+      duration: parseFloat(formData.duration),
+      season: formData.season.join(", "),
     };
     try {
       await dispatch(createActivity(formDataToSend));
       setFormData({
         name: "",
-        difficulty: 1,
-        duration: 1,
-        season: [],
+        difficulty: 0,
+        duration: 0,
+        season: "",
+        selectedCountries: [],
       });
     } catch (error) {
       console.error("Error al crear la actividad:", error);
@@ -113,7 +132,6 @@ function TourForm() {
         Temporada:
         <select
           name="season"
-          multiple
           value={formData.season}
           onChange={handleSeasonChange}
         >
