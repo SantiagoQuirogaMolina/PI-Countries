@@ -1,37 +1,46 @@
-const {  activityM, countryM } = require("../db");
+const { activityM, countryM } = require("../db");
 // Asegúrate de importar tus modelos correctamente
 
 const createActivity = async (activityData) => {
   try {
-    const { name, difficulty, duration, season, countries } = activityData;
+    const { name, difficulty, duration, season, selectedCountries } =
+      activityData;
+
     const newActivity = await activityM.create({
       name,
       difficulty,
       duration,
       season,
-      countries
+      selectedCountries,
     });
-    if (countries && countries.length > 0) {
-        
+    console.log(selectedCountries)
+    if (selectedCountries) {
       const countriesToRelate = await countryM.findAll({
         where: {
-          id: countries,
+          id: selectedCountries,
         },
       });
-  await newActivity.setCountries(countriesToRelate);
+      console.log(countriesToRelate);
+      await newActivity.addCountries(countriesToRelate);
     }
     return newActivity;
   } catch (error) {
-    throw error; 
+    throw error;
   }
 };
 const getAllActivities = async () => {
-
-    const activitiesDB = await activityM.findAll();
-    return [...activitiesDB];
-  };
+  const activitiesDB = await activityM.findAll({
+    include: [
+      {
+        model: countryM,
+        as: "countries", // Alias para la relación
+        // ... otras configuraciones de inclusión si las tienes
+      },
+    ],
+  });
+  return activitiesDB;
+};
 module.exports = {
   createActivity,
-  getAllActivities
-  
+  getAllActivities,
 };

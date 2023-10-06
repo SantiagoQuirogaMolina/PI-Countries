@@ -1,0 +1,70 @@
+/* En tu archivo de estilos CSS */
+.map-container {
+  width: 500px;
+  height: 300px;
+  border: 1px solid #ccc;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Estilo para el mapa en sí */
+.map {
+  width: 100%;
+  height: 100%;
+}
+
+.nombreYbandera {
+  display: flex;
+  align-items: center; /* Centra verticalmente los elementos */
+  justify-content: center;
+}
+
+.bandera {
+  margin-left: 2rem;
+  width: 100px;
+  height: 50px;
+  border-radius: 8px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.5);
+}
+.content {
+ 
+  padding: 20px; /* Espaciado interno */
+  border-radius: 5px; /* Bordes redondeados */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra */
+  margin-top: 20px; /* Espacio superior */
+}
+
+.content p {
+  margin: 0px 0; /* Espacio entre los párrafos */
+}
+
+.content strong {
+  font-weight: bold; /* Texto en negrita */
+}
+.parrafo{
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+}
+.titulo{
+    color: aqua;
+}
+.content{
+    display: flex;
+}
+.gurpo{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    
+}
+
+.textTops{
+    visibility: hidden;
+    color: rgb(255, 255, 255);
+ 
+}
+.textTops span{
+
+    color: rgb(249, 5, 5);
+ 
+}

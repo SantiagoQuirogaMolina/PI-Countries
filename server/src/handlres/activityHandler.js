@@ -2,7 +2,6 @@ const { createActivity, getAllActivities } = require("../controllers/activityCon
 
 
 const getActivityHandler = async (req, res) => {
-
   try {
     const activity = await getAllActivities(req.body);
     res.status(201).json(activity);

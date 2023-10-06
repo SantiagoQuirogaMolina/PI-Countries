@@ -6,71 +6,99 @@ import Navbar from "../../components/navbar/navbar";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import "./home.css";
 
-import backgroundImage1 from "./continentes/mundi.png"; // Ruta a tu imagen de fondo 1
-import backgroundImage2 from "./continentes/america.png"; // Ruta a tu imagen de fondo 2
-import backgroundImage3 from "./continentes/asia.png"; // Ruta a tu imagen de fondo 3
+import backgroundMundi from "./continentes/mundi.png";
+import backgroundAmerica from "./continentes/america.png";
+import backgroundAsia from "./continentes/asia.png";
+import backgroundAfrica from "./continentes/africa.png";
+import backgroundEuropa from "./continentes/europa.png";
+import backgroundOceania from "./continentes/oceania.png";
 
 function Home() {
   const dispatch = useDispatch();
   const allCountries = useSelector((state) => state.allCountries);
-
   const [searchString, setSearchString] = useState("");
   const [searchError, setSearchError] = useState(null);
-  // Agrega un estado para el temporizador
   const [searchTimeout, setSearchTimeout] = useState(null);
-
-  const [backgroundImage, setBackgroundImage] = useState(backgroundImage1); // Estado para la imagen de fondo
-  const [filtroSeleccionado, setFiltroSeleccionado] = useState("Filtro1"); // Cambia 'Filtro1' al filtro inicial
-
+  const [backgroundImage, setBackgroundImage] = useState(backgroundMundi);
+  const [filtroSeleccionado, setFiltroSeleccionado] = useState("todos");
+  const [filteredCountries, setFilteredCountries] = useState(allCountries);
+  const [sortBy, setSortBy] = useState("az");
+  const [sortedCountries, setSortedCountries] = useState(allCountries);
+  
   async function handleChange(e) {
     const newSearchString = e.target.value;
     setSearchString(newSearchString);
-
-    // Borra el temporizador anterior si existe
+  
     if (searchTimeout) {
       clearTimeout(searchTimeout);
     }
-
-    // Configura un nuevo temporizador para realizar la búsqueda después de un retraso
+  
     const newSearchTimeout = setTimeout(async () => {
       try {
-        setSearchError(null); // Borra cualquier error anterior
-
+        setSearchError(null);
+  
         if (newSearchString === "") {
-          // Si la barra de búsqueda está vacía, obtén todos los países nuevamente
-          dispatch(getCountries());
+          setFilteredCountries(allCountries); // Restablecer la lista completa al borrar la búsqueda
         } else {
           const results = await dispatch(getCountriesByName(newSearchString));
-
+  
           if (results.payload[0].message) {
             setSearchError(results.payload[0].message);
           } else {
-            setSearchError(null); // Borra el mensaje de error si se encontraron resultados
+            setSearchError(null);
+            setFilteredCountries(results.payload); // Actualizar la lista filtrada
           }
         }
       } catch (error) {
         console.error("Error en la búsqueda:", error);
         setSearchError("Se produjo un error al realizar la búsqueda.");
       }
-    }, 500); // Puedes ajustar el tiempo de retraso según tus necesidades
-
+    }, 500);
+  
     setSearchTimeout(newSearchTimeout);
   }
+
   useEffect(() => {
     dispatch(getCountries());
   }, [dispatch]);
 
   useEffect(() => {
-    // Lógica para determinar qué imagen de fondo se debe mostrar según los filtros seleccionados
-    if (filtroSeleccionado === "Filtro1") {
-      setBackgroundImage(backgroundImage1);
-    } else if (filtroSeleccionado === "Filtro2") {
-      setBackgroundImage(backgroundImage2);
-    } else if (filtroSeleccionado === "Filtro3") {
-      setBackgroundImage(backgroundImage3);
+    // Filtrar los países según el continente seleccionado
+    const filtered = allCountries.filter((country) => {
+      if (filtroSeleccionado === "todos") {
+        return true;
+      }
+      return country.continent === filtroSeleccionado;
+    });
+
+    // Aplicar el ordenamiento
+    const sorted = [...filtered];
+
+    if (sortBy === "az") {
+      sorted.sort((a, b) => a.name.localeCompare(b.name));
+    } else if (sortBy === "za") {
+      sorted.sort((a, b) => b.name.localeCompare(a.name));
+    }
+
+    setFilteredCountries(filtered);
+    setSortedCountries(sorted);
+
+    // Actualizar la imagen de fondo
+    if (filtroSeleccionado === "todos") {
+      setBackgroundImage(backgroundMundi);
+    } else if (filtroSeleccionado === "Americas") {
+      setBackgroundImage(backgroundAmerica);
+    } else if (filtroSeleccionado === "Africa") {
+      setBackgroundImage(backgroundAfrica);
+    } else if (filtroSeleccionado === "Asia") {
+      setBackgroundImage(backgroundAsia);
+    } else if (filtroSeleccionado === "Europe") {
+      setBackgroundImage(backgroundEuropa);
+    } else if (filtroSeleccionado === "Oceania") {
+      setBackgroundImage(backgroundOceania);
     }
     // Agrega condiciones adicionales según sea necesario para otros filtros
-  }, [filtroSeleccionado]);
+  }, [filtroSeleccionado, allCountries, sortBy]);
 
   return (
     <div
@@ -79,11 +107,37 @@ function Home() {
     >
       <p className="text-home">WORLD-COUNTRIES</p>
       <SearchBar handleChange={handleChange} />
-      <Navbar handleChange={handleChange} />
+      <div className="filter-container">
+        <label htmlFor="continent-filter">Filtrar por continente:</label>
+        <select
+          id="continent-filter"
+          value={filtroSeleccionado}
+          onChange={(e) => setFiltroSeleccionado(e.target.value)}
+        >
+          <option value="todos">Todos</option>
+          <option value="Americas">América</option>
+          <option value="Africa">África</option>
+          <option value="Asia">Asia</option>
+          <option value="Europe">Europa</option>
+          <option value="Oceania">Oceanía</option>
+          {/* Agrega más opciones para otros continentes si es necesario */}
+        </select>
+      </div>
+      <div className="sort-container">
+        <label htmlFor="sort-filter">Ordenar por:</label>
+        <select
+          id="sort-filter"
+          value={sortBy}
+          onChange={(e) => setSortBy(e.target.value)}
+        >
+          <option value="az">A-Z</option>
+          <option value="za">Z-A</option>
+        </select>
+      </div>
       {searchError ? (
         <p>{searchError}</p>
-      ) : allCountries.length > 0 ? (
-        <Cards allCountries={allCountries} />
+      ) : filteredCountries.length > 0 ? (
+        <Cards allCountries={sortedCountries} /> // Mostrar los países ordenados
       ) : (
         <p>No se encontraron países.</p>
       )}

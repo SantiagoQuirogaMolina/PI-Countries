@@ -45,7 +45,7 @@ const getCountrieById = async (id) => {
   return country;
 };
 const getCountrieByName = async (name) => {
-  const country = await await countryM.findAll({
+  const country = await countryM.findAll({
     where: {
       name: {
         [Op.iLike]: `%${name}%`, // Búsqueda de coincidencia parcial insensible a mayúsculas/minúsculas
