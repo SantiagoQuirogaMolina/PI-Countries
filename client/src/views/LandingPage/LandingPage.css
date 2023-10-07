@@ -7,7 +7,10 @@
   height: 100%;
   z-index: -1; /* Coloca el video detrás del contenido */
   overflow: hidden; /* Evita que el video se desborde del contenedor */
-  opacity: 0.5;
+  opacity: 0.6;
+  
+  
+
 }
 
 /* Establece el video de fondo para cubrir toda la pantalla */
@@ -15,6 +18,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  filter: brightness(3);
 }
 
 /*--------------------------------------------
@@ -85,12 +89,11 @@
 }
 
 .t-stroke {
-  color: transparent;
+  font-family: serif;
   -moz-text-stroke-width: 3px;
-  -webkit-text-stroke-width: 4.4px;
-  -moz-text-stroke-color: #c4b7b7;
-  -webkit-text-stroke-color: #f1e9e9;
-
+  -webkit-text-stroke-width: 2.1px;
+  -moz-text-stroke-color: #0f0e0e;
+  -webkit-text-stroke-color: #eaeaeac1;
   margin-bottom: 0.5rem;
 }
 

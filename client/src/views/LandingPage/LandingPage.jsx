@@ -11,7 +11,7 @@ function LandingPage() {
   const [charIndex, setCharIndex] = useState(0);
   const [showHomeButton, setShowHomeButton] = useState(false); // Nuevo estado para mostrar el botón
 
-  const delay = 268; // Define el valor de delay para controlar la velocidad de escritura
+  const delay = 178; // Define el valor de delay para controlar la velocidad de escritura
 
   useEffect(() => {
     const typeEffect = () => {
@@ -33,7 +33,7 @@ function LandingPage() {
               setCurrentIndex((prevIndex) => (prevIndex + 1) % texts.length);
               setCharIndex(0); // Reinicia el índice de caracteres para la siguiente palabra
               setIsTyping(true); // Comienza a escribir la siguiente palabra
-            }, 1000); // Espera 1 segundo antes de iniciar la siguiente palabra
+            }, 300); // Espera 1 segundo antes de iniciar la siguiente palabra
           }
         }
       }
@@ -42,7 +42,7 @@ function LandingPage() {
     const typeInterval = setInterval(typeEffect, delay); // Utiliza el delay para controlar la velocidad
     // Ajusta la velocidad del video a 1.5x (o el valor que desees)
     const videoElement = document.querySelector(".background-video video");
-    videoElement.playbackRate = 1.2; // Cambia este valor según la velocidad deseada
+    videoElement.playbackRate = 2; // Cambia este valor según la velocidad deseada
 
     return () => clearInterval(typeInterval); // Limpia el intervalo al desmontar el componente
   }, [charIndex, isTyping, currentIndex, text, delay, texts]);

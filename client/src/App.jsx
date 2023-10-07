@@ -5,6 +5,7 @@ import Home from "./views/home/home";
 import Detail from "./views/detail/detail";
 import Create from "./views/create/create";
 import LandingPage from  "./views/LandingPage/LandingPage";
+import Activities from "./views/activities/activities";
 
 import "./App.css";
 
@@ -16,6 +17,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="home/id/:id" element={<Detail />} />
         <Route path="/create" element={<Create />} />
+        <Route path="/activities" element={<Activities />} />
       </Routes>
     </div>
   );

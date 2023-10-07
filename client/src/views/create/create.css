@@ -1,0 +1,84 @@
+/* Agrega estilos al formulario */
+form {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  background-color: #f5f5f53a;
+}
+
+/* Estilos para las etiquetas de los campos */
+label {
+  color: #ffffff;
+  display: block;
+  font-weight: bold;
+  max-width: 90%;
+  text-align: left;
+}
+
+/* Estilos para los campos de entrada */
+input[type="text"],
+input[type="number"],
+select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Estilos para el botón */
+button {
+  background-color: #000000;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Estilos para los mensajes de error y éxito */
+.error {
+  color: #6b0504ff;
+  margin: 0;
+}
+
+.exito {
+  margin: auto;
+  margin-top: 1rem;
+    width: 20rem;
+    background-color: #ccccccd0;
+    color: rgba(34, 26, 26, 0.6);
+    font-weight: bold;
+    text-align: center; /* Centra el texto en el elemento */
+    position: relative; /* Establece la posición relativa para que se pueda posicionar el contenido adicional */
+    border-radius: 0.4rem;
+    font-size: 1.2rem;
+  }
+  
+  .exito::after {
+    color: #086120;
+    content: "✔"; /* Agrega un símbolo de verificación como contenido después del texto */
+    display: block; /* Convierte el contenido en un elemento en bloque */
+    font-size: 24px; /* Ajusta el tamaño del símbolo de verificación según tus preferencias */
+    margin-top: 5px; /* Establece un margen superior para separar el símbolo de verificación del texto */
+  }
+  
+li {
+  list-style: none; /* Elimina el marcador de lista por defecto */
+  padding-left: 20px; /* Agrega un espacio para el icono "x" */
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  background-color: #cccccc7c;
+  margin: 1rem;
+  border-radius: 0.3rem;
+  border: #eceded solid 1px;
+  width: 16rem;
+}
+
+li::before {
+  content: "✘"; /* Agrega una "x" como contenido antes del elemento <li> */
+  margin-right: 10px; /* Ajusta el espacio entre la "x" y el texto */
+  color: rgba(201, 5, 5, 0.87);
+}

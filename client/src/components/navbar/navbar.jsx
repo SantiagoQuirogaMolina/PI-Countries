@@ -16,6 +16,9 @@ const Nav = () => {
             <NavLink to='/home'>
                 <button>Home</button>
             </NavLink>
+            <NavLink to='/activities'>
+                <button>Actividades</button>
+            </NavLink>
 
         </nav>
     )

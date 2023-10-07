@@ -21,14 +21,11 @@ function Detail({ google }) {
     initialPopulationCount
   );
   const [areaCount, setAreaCount] = useState(initialAreaCount);
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
 
   useEffect(() => {
     dispatch(getCountriesById(id));
-    // Al desmontar el componente, reinicia los contadores
-    return () => {
-      setPopulationCount(0);
-      setAreaCount(0);
-    };
   }, [dispatch, id]);
 
   useEffect(() => {
@@ -82,6 +79,13 @@ function Detail({ google }) {
     };
   }, [country, populationCount, areaCount]);
 
+  useEffect(() => {
+    if (country) {
+      setLatitude(country.latlng[0]);
+      setLongitude(country.latlng[1]);
+    }
+  }, [country]);
+
   if (!country) {
     return (
       <div>
@@ -89,10 +93,20 @@ function Detail({ google }) {
       </div>
     );
   }
+
   const populationStyle = populationCount > 1000000000 ? { color: "red" } : {};
-  const textTops = populationCount > 1000000000 ? { visibility: "visible" } : {};
+  const textTops =
+    populationCount > 1000000000 ? { visibility: "visible" } : {};
+
   return (
     <div>
+      {/* Agrega una clave única para el componente Map */}
+      <div className="map-container" key={`map-${latitude}-${longitude}`}>
+        {/* Utiliza el componente Map de google-maps-react */}
+        <Map google={google} initialCenter={{ lat: latitude, lng: longitude }} zoom={4}>
+          {/* Coloca un marcador en las coordenadas del país */}
+        </Map>
+      </div>
       <div className="nombreYbandera">
         <h1>{country.name}</h1>
         <img
@@ -101,18 +115,8 @@ function Detail({ google }) {
           alt="imagen de la bandera"
         />
       </div>
-      <div className="map-container">
-        {/* Utiliza el componente Map de google-maps-react */}
-        <Map
-          google={google}
-          initialCenter={{ lat: -1.28, lng: 36.82 }}
-          zoom={4}
-        >
-          {/* Coloca un marcador en las coordenadas del país */}
-        </Map>
-      </div>
       <div className="content">
-        <div className="gurpo">
+        <div className="gurpos">
           <p className="parrafo">
             <strong className="titulo">Continente:</strong> {country.continent}
           </p>
@@ -123,16 +127,13 @@ function Detail({ google }) {
             <strong className="titulo">Subregión:</strong> {country.subregion}
           </p>
         </div>
-        <div className="gurpo">
+        <div className="gurpos">
           <p className="parrafo">
             <strong className="titulo">Área:</strong> {areaCount} km²
           </p>
           <p className="parrafo" style={populationStyle}>
-            <strong className="titulo" >
-              Población:
-            </strong>{" "}
-           
-            {populationCount}  <strong className="textTops" style={textTops}>
+            <strong className="titulo">Población:</strong> {populationCount}{" "}
+            <strong className="textTops" style={textTops}>
               Top <span>1</span>
             </strong>
           </p>
@@ -144,5 +145,5 @@ function Detail({ google }) {
 
 // Utiliza GoogleApiWrapper para conectar tu componente a la API de Google Maps
 export default GoogleApiWrapper({
-  apiKey: "AIzaSyD0KKYmfssWuLWEaEuv2qY_Rl7-DPiUvBU", // Reemplaza con tu propia clave de API
+  apiKey: "AIzaSyCmcrF5sd0o61GBEyPAsdYQLOYHpkmjreA", // Reemplaza con tu propia clave de API
 })(Detail);

@@ -13,14 +13,13 @@ const createActivity = async (activityData) => {
       season,
       selectedCountries,
     });
-    console.log(selectedCountries)
+
     if (selectedCountries) {
       const countriesToRelate = await countryM.findAll({
         where: {
           id: selectedCountries,
         },
       });
-      console.log(countriesToRelate);
       await newActivity.addCountries(countriesToRelate);
     }
     return newActivity;

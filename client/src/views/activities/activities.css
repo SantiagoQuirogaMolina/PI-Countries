@@ -1,0 +1,68 @@
+/* Estilo general del contenedor de actividades */
+.activity-container {
+    display: flex;
+    flex-wrap: wrap; /* Permite que las actividades se envuelvan a la siguiente fila */
+    justify-content: center; /* Distribuye las actividades uniformemente */
+    padding: 20px;
+  }
+  
+  /* Estilo del cuadro de actividad individual */
+  .activity-box {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff4d;
+    min-width: calc(33.33% - 20px); /* Para que haya tres actividades por fila */
+    box-sizing: border-box;
+    
+  }
+  
+  /* Estilo del título de actividad */
+  .activity-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: rgb(89, 192, 180);
+  }
+  
+  /* Estilo de los detalles de actividad */
+  .activity-details {
+    font-size: 14px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    
+  }
+  
+  /* Estilo de la lista de países */
+  .country-list {
+    list-style: none;
+    padding: 0;
+    margin-left: 2rem;
+  }
+  
+  /* Estilo de cada país en la lista */
+  .country-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    
+  }
+  
+  /* Estilo de la bandera del país */
+  .country-flag {
+    width: 30px;
+    height: 20px;
+    margin-right: 10px;
+  }
+  
+  /* Estilo del nombre del país */
+  .country-name {
+    font-weight: bold;
+  
+  }
+  

@@ -1,24 +1,46 @@
-.home{
-    display: flex;
-    flex-direction: column; /* Alinea los elementos verticalmente */
-    justify-content: flex-start; /* Alinea arriba verticalmente */
-    align-items: center; /* Centra horizontalmente */
-    height: 100vh; 
+.home {
+  display: flex;
+  flex-direction: column; /* Alinea los elementos verticalmente */
+  justify-content: flex-start; /* Alinea arriba verticalmente */
+  align-items: center; /* Centra horizontalmente */
+  height: 100vh;
 }
-.text-home{
-    margin-top: -3rem;
-    margin-bottom: -1.5rem;
-    font-size: 2rem;
-    font-family: "Georgia", serif;
+.text-home {
+  margin-top: -3rem;
+  margin-bottom: -1.5rem;
+  font-size: 2rem;
+  font-family: "Georgia", serif;
 }
 /* backgroundStyles.css */
 
 /* Estilos para el fondo de la página */
 .home-background {
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center center;
-    min-height: 100vh;
-    
-  }
-  
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
+  min-height: 100vh;
+}
+
+.filtros {
+  display: flex;
+}
+#continent-filter,
+#sort-filter {
+  margin-left: 0.5rem;
+  max-height: 2.2rem;
+}
+.filter-container {
+  display: flex; /* Hace que los contenedores sean elementos en línea */
+  margin-right: 10px; /* Establece un margen derecho entre los contenedores */
+}
+.sort-container {
+  display: flex; /* Hace que los contenedores sean elementos en línea */
+  margin-right: 10px; /* Establece un margen derecho entre los contenedores */
+}
+/* Agrega más estilos según sea necesario para personalizar la apariencia */
+.textLabel {
+  line-height: 1;
+}
+.select{
+  width: 10rem;
+}

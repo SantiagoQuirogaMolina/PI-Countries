@@ -46,16 +46,17 @@
     font-size: 20px;
 }
 .titulo{
-    color: aqua;
+    color: rgb(142, 238, 238);
 }
 .content{
     display: flex;
+    
 }
-.gurpo{
+.gurpos{
+ 
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    
 }
 
 .textTops{
@@ -65,6 +66,6 @@
 }
 .textTops span{
 
-    color: rgb(249, 5, 5);
+    color:5e0706ff;
  
 }

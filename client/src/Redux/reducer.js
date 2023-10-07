@@ -36,6 +36,22 @@ const reducer = (state = initialState, action) => {
         ...state,
         getCountriesById: action.payload,
       };
+    case "GET_ACTIVITIES":
+      return {
+        ...state,
+        activities: action.payload,
+      };
+    case "DELETE_ACTIVITY": {
+      const activityIdToDelete = action.payload;
+      const updatedActivities = state.activities.filter(
+        (activity) => activity.id !== activityIdToDelete
+      );
+
+      return {
+        ...state,
+        activities: updatedActivities,
+      };
+    }
 
     default:
       return state;

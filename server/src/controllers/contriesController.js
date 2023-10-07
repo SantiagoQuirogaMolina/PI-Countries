@@ -18,6 +18,7 @@ const cleanInfo = (infoArray) =>
       subregion: countryInfo.subregion || null, // Subregión
       area: countryInfo.area || null,
       population: countryInfo.population || 0,
+      latlng: countryInfo.latlng || [],
     };
 
     return result;
@@ -32,7 +33,15 @@ const updateDatabaseWithApiCountries = async () => {
   }
 };
 const getAllCountries = async () => {
-  const CountriesDB = await countryM.findAll();
+  const CountriesDB = await countryM.findAll({
+    include: [
+      {
+        model: activityM,
+        as: "activities", // Alias para la relación
+        // ... otras configuraciones de inclusión si las tienes
+      },
+    ],
+  });
   const response = await axios.get(URL);
   const CountriesApi = response.data;
 
@@ -52,14 +61,15 @@ const getCountrieByName = async (name) => {
       },
     },
   });
+
   if (country.length === 0) {
     return [
       { message: "No se encontraron países que coincidan con la búsqueda." },
     ];
   }
+
   return country;
 };
-
 
 module.exports = {
   getAllCountries,
