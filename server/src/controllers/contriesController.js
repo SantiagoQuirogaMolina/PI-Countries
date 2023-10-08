@@ -20,18 +20,23 @@ const cleanInfo = (infoArray) =>
       population: countryInfo.population || 0,
       latlng: countryInfo.latlng || [],
     };
-
     return result;
   });
 const updateDatabaseWithApiCountries = async () => {
-  const apiCountries = await getAllCountries();
-
-  for (const apiCountry of apiCountries) {
-    if (apiCountry.cca3 !== "NNCODIGOID" && apiCountry.cca3 !== null) {
-      await countryM.upsert(apiCountry);
+  console.log("Obteniendo datos de la API...");
+  const response = await axios.get(URL);
+  const apiCountries = response.data;
+  const cleanedData = cleanInfo(apiCountries);
+  console.log("verificadndo que el mdoelo exista ");
+  console.log(countryM)
+  for (const cleanedCountry of cleanedData) {
+    if (cleanedCountry.id !== "NNCODIGOID") {
+      await countryM.upsert(cleanedCountry);
     }
   }
+  console.log("Base de datos actualizada con éxito.");
 };
+
 const getAllCountries = async () => {
   const CountriesDB = await countryM.findAll({
     include: [
@@ -42,12 +47,7 @@ const getAllCountries = async () => {
       },
     ],
   });
-  const response = await axios.get(URL);
-  const CountriesApi = response.data;
-
-  const apii = cleanInfo(CountriesApi);
-
-  return [...CountriesDB, ...apii];
+  return CountriesDB;
 };
 const getCountrieById = async (id) => {
   const country = await countryM.findByPk(id);

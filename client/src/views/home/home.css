@@ -36,6 +36,7 @@
 .sort-container {
   display: flex; /* Hace que los contenedores sean elementos en línea */
   margin-right: 10px; /* Establece un margen derecho entre los contenedores */
+  max-width: 9rem;
 }
 /* Agrega más estilos según sea necesario para personalizar la apariencia */
 .textLabel {
@@ -43,4 +44,12 @@
 }
 .select{
   width: 10rem;
+}
+.activity-filter-container{
+  max-width: 15rem;
+  display: flex;
+  margin-right: 1rem;
+}
+.filtro-continente{
+  max-width: 11rem;
 }

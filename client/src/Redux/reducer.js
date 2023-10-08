@@ -13,20 +13,8 @@ const reducer = (state = initialState, action) => {
         activities: [...state.activities, action.payload],
       };
 
-    case "ASSIGN_ACTIVITY_TO_COUNTRY":
-      return {
-        ...state,
-        activityCountryAssignments: [
-          ...state.activityCountryAssignments,
-          action.payload,
-        ],
-      };
     case "GET_COUNTRIES":
-      return {
-        ...state,
-        allCountries: action.payload,
-      };
-    case "GET_COUNTRIES_BY_NAME":
+    case "GET_COUNTRIES_BY_NAME": // Manejar ambas acciones aquí
       return {
         ...state,
         allCountries: action.payload,

@@ -53,11 +53,6 @@ export const getActivities = () => {
   }
 };
 
-export const assignActivityToCountry = (activityId, countryId) => ({
-  type: "ASSIGN_ACTIVITY_TO_COUNTRY",
-  payload: { activityId, countryId },
-});
-
 export const getCountries = () => {
   try {
     const endpoint = "http://localhost:3001/countries";

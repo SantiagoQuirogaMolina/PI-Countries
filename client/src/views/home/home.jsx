@@ -17,24 +17,28 @@ import backgroundOceania from "./continentes/oceania.png";
 
 function Home() {
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getCountries());
+  }, [dispatch]);
+
   const allCountries = useSelector((state) => state.allCountries);
+
   const [searchString, setSearchString] = useState("");
   const [searchError, setSearchError] = useState(null);
   const [searchTimeout, setSearchTimeout] = useState(null);
   const [backgroundImage, setBackgroundImage] = useState(backgroundMundi);
   const [filtroSeleccionado, setFiltroSeleccionado] = useState("todos");
-  const [filteredCountries, setFilteredCountries] = useState(allCountries);
+  const [filteredCountries, setFilteredCountries] = useState([]);
   const [sortBy, setSortBy] = useState("az");
-  const [sortedCountries, setSortedCountries] = useState(allCountries);
+  const [sortedCountries, setSortedCountries] = useState([]);
+  const [activityFilter, setActivityFilter] = useState("");
 
   async function handleChange(e) {
     const newSearchString = e.target.value;
     setSearchString(newSearchString);
-
     if (searchTimeout) {
       clearTimeout(searchTimeout);
     }
-
     const newSearchTimeout = setTimeout(async () => {
       try {
         setSearchError(null);
@@ -43,7 +47,6 @@ function Home() {
           setFilteredCountries(allCountries); // Restablecer la lista completa al borrar la búsqueda
         } else {
           const results = await dispatch(getCountriesByName(newSearchString));
-
           if (results.payload[0].message) {
             setSearchError(results.payload[0].message);
           } else {
@@ -56,13 +59,8 @@ function Home() {
         setSearchError("Se produjo un error al realizar la búsqueda.");
       }
     }, 500);
-
     setSearchTimeout(newSearchTimeout);
   }
-
-  useEffect(() => {
-    dispatch(getCountries());
-  }, [dispatch]);
 
   useEffect(() => {
     // Filtrar los países según el continente seleccionado
@@ -73,8 +71,18 @@ function Home() {
       return country.continent === filtroSeleccionado;
     });
 
+    // Filtrar por actividad
+    const filteredByActivity = filtered.filter((country) => {
+      if (activityFilter === "") {
+        return true;
+      }
+      return country.activities.some((activity) =>
+        activity.name.toLowerCase().includes(activityFilter.toLowerCase())
+      );
+    });
+
     // Aplicar el ordenamiento
-    const sorted = [...filtered];
+    const sorted = [...filteredByActivity];
 
     if (sortBy === "az") {
       sorted.sort((a, b) => a.name.localeCompare(b.name));
@@ -88,7 +96,7 @@ function Home() {
       sorted.sort((a, b) => b.population - a.population);
     }
 
-    setFilteredCountries(filtered);
+    setFilteredCountries(filteredByActivity);
     setSortedCountries(sorted);
 
     // Actualizar la imagen de fondo
@@ -106,7 +114,7 @@ function Home() {
       setBackgroundImage(backgroundOceania);
     }
     // Agrega condiciones adicionales según sea necesario para otros filtros
-  }, [filtroSeleccionado, allCountries, sortBy]);
+  }, [filtroSeleccionado, allCountries, sortBy, activityFilter]);
 
   return (
     <div
@@ -116,7 +124,7 @@ function Home() {
       <p className="text-home">WORLD-COUNTRIES</p>
       <SearchBar handleChange={handleChange} />
       <div className="filtros">
-        <div className="filter-container">
+        <div className="filter-container filtro-continente">
           <label htmlFor="continent-filter" className="textLabel">
             Filtrar por continente:
           </label>
@@ -134,6 +142,18 @@ function Home() {
             {/* Agrega más opciones para otros continentes si es necesario */}
           </select>
         </div>
+        <div className="activity-filter-container">
+          <label htmlFor="activity-filter" className="textLabel">
+            Filtrar por actividad:
+          </label>
+          <input
+            type="text"
+            id="activity-filter"
+            value={activityFilter}
+            onChange={(e) => setActivityFilter(e.target.value)}
+            placeholder="Nombre de la actividad"
+          />
+        </div>
         <div className="sort-container">
           <label htmlFor="sort-filter" className="textLabel">
             Ordenar por:
@@ -148,7 +168,6 @@ function Home() {
           </select>
         </div>
         <select
-        
           id="sort-filter"
           value={sortBy}
           onChange={(e) => setSortBy(e.target.value)}
