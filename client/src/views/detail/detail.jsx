@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCountriesById } from "../../Redux/action";
 import { useParams } from "react-router-dom";
 import "./detail.css";
+import Nav from "../../components/navbar/navbar";
 
 // Importa los componentes necesarios de la librería google-maps-react
 import { Map, GoogleApiWrapper } from "google-maps-react";
@@ -34,7 +35,6 @@ function Detail({ google }) {
       if (country && populationCount < country.population) {
         // Calcular la velocidad de conteo en función del valor objetivo
         const targetValue = country.population;
-        const remainingValue = targetValue - populationCount;
         const speed = Math.max(1, Math.floor(targetValue / 1000)); // Ajusta el divisor según la velocidad deseada
 
         // Incrementa el conteo en función de la velocidad
@@ -52,7 +52,6 @@ function Detail({ google }) {
       if (country && country.area && areaCount < country.area) {
         // Calcular la velocidad de conteo en función del valor objetivo
         const targetValue = country.area;
-        const remainingValue = targetValue - areaCount;
         const speed = Math.max(1, Math.floor(targetValue / 1000)); // Ajusta el divisor según la velocidad deseada
 
         // Incrementa el conteo en función de la velocidad
@@ -94,12 +93,13 @@ function Detail({ google }) {
     );
   }
 
-  const populationStyle = populationCount > 1000000000 ? { color: "red" } : {};
+  const populationStyle = populationCount > 1400000000 ? { color: "red" } : {};
   const textTops =
-    populationCount > 1000000000 ? { visibility: "visible" } : {};
+    populationCount > 1400000000 ? { visibility: "visible" } : {};
 
   return (
     <div>
+      <Nav/>
       {/* Agrega una clave única para el componente Map */}
       <div className="map-container" key={`map-${latitude}-${longitude}`}>
         {/* Utiliza el componente Map de google-maps-react */}

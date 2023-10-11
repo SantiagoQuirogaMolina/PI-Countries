@@ -11,7 +11,7 @@ function LandingPage() {
   const [charIndex, setCharIndex] = useState(0);
   const [showHomeButton, setShowHomeButton] = useState(false); // Nuevo estado para mostrar el botón
 
-  const delay = 178; // Define el valor de delay para controlar la velocidad de escritura
+  const delay = 158; // Define el valor de delay para controlar la velocidad de escritura
 
   useEffect(() => {
     const typeEffect = () => {

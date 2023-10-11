@@ -8,11 +8,7 @@ const Nav = () => {
     
     return(
         <nav className="nav">
-            
-            <Link to='/home'>
-                <button>About</button>
-            </Link>
-
+     
             <NavLink to='/home'>
                 <button>Home</button>
             </NavLink>
