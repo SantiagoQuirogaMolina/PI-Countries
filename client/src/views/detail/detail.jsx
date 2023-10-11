@@ -145,5 +145,5 @@ function Detail({ google }) {
 
 // Utiliza GoogleApiWrapper para conectar tu componente a la API de Google Maps
 export default GoogleApiWrapper({
-  apiKey: "AIzaSyCmcrF5sd0o61GBEyPAsdYQLOYHpkmjreA", // Reemplaza con tu propia clave de API
+  apiKey: "xxxxxxxxxxxxxxxxx", // Reemplaza con tu propia clave de API
 })(Detail);
